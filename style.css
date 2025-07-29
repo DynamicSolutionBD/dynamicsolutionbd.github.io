@@ -27,6 +27,14 @@ body {
     color: #ffffff;
 }
 
+.text-grey-dark {
+    color: color-mix(in srgb, var(--ds-grey), black 50%);
+}
+
+.bg-grey-light {
+    background: color-mix(in srgb, var(--ds-grey), white 80%);
+}
+
 .navbar-brand {
     color: var(--primary-red) !important;
     font-weight: 700;
