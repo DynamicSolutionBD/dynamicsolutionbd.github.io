@@ -21,4 +21,18 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     });
+
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    function updateNavbar() {
+        if (window.scrollY > 10) {
+            navbar.classList.add('navbar-scrolled');
+            navbar.classList.remove('navbar-custom');
+        } else {
+            navbar.classList.add('navbar-custom');
+            navbar.classList.remove('navbar-scrolled');
+        }
+    }
+    updateNavbar();
+    window.addEventListener('scroll', updateNavbar);
 });

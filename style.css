@@ -36,7 +36,7 @@ body {
 }
 
 .navbar-brand {
-    color: var(--primary-red) !important;
+    color: var(--ds-orange) !important;
     font-weight: 700;
     letter-spacing: 1px;
 }
@@ -114,4 +114,18 @@ footer .fw-bold {
         width: 65px;
         height: 65px;
     }
+}
+
+/* Navbar initial state: match hero section background, no shadow */
+.navbar-custom {
+    background: color-mix(in srgb, var(--ds-grey), white 80%) !important;
+    box-shadow: none !important;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+/* Navbar scrolled state: white background, shadow */
+.navbar-scrolled {
+    background: var(--background-white) !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10) !important;
+    transition: background 0.3s, box-shadow 0.3s;
 }
