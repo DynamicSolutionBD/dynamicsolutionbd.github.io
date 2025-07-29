@@ -1,0 +1,109 @@
+
+/* Color Variables */
+:root {
+    --ds-orange: #ff4817;
+    --ds-black: #000000;
+    --ds-grey: #a7a9ad;
+    --primary-red: #d32f2f;
+    --background-light: #fafafa;
+    --background-white: #fff;
+    --background-dark: #222;
+    --text-white: #fff;
+    --main-font: 'Raleway', Arial, sans-serif;
+}
+
+/* General Styles */
+body {
+    scroll-behavior: smooth;
+    background: var(--background-light);
+    font-family: var(--main-font);
+}
+
+.text-orange {
+    color: var(--ds-orange);
+}
+
+.text-white {
+    color: #ffffff;
+}
+
+.navbar-brand {
+    color: var(--primary-red) !important;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.hero-section {
+    background: color-mix(in srgb, var(--ds-grey), white 80%);
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+}
+
+.hero-img {
+    max-width: 90%;
+}
+
+.btn-danger {
+    background-color: var(--ds-orange) !important;
+    border: none;
+}
+
+.btn-danger:hover {
+    background-color: color-mix(in srgb, var(--ds-orange), black 30%) !important;
+    border: none;
+}
+
+.grayscale {
+    filter: grayscale(100%);
+}
+
+.service-icon {
+    width: 75px;
+    height: 75px;
+    object-fit: contain;
+}
+
+.gallery-img {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+
+.card {
+    border-radius: 12px;
+}
+
+footer {
+    font-size: 0.98rem;
+    background: var(--background-dark);
+    color: var(--text-white);
+}
+
+footer .fw-bold {
+    color: var(--primary-red) !important;
+}
+
+.nav-link.active, .nav-link:focus, .nav-link:hover {
+    color: var(--primary-red) !important;
+}
+
+@media (max-width: 768px) {
+    .hero-section {
+        min-height: 60vh;
+        padding-top: 4rem;
+    }
+    .hero-img {
+        padding-top: 1.5rem;
+    }
+    .service-icon {
+        width: 55px;
+        height: 55px;
+    }
+    .gallery-img {
+        width: 65px;
+        height: 65px;
+    }
+}
