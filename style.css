@@ -27,6 +27,10 @@ body {
     color: #ffffff;
 }
 
+.text-align-justift {
+    text-align: justify;
+}
+
 .text-grey-dark {
     color: color-mix(in srgb, var(--ds-grey), black 50%);
 }
