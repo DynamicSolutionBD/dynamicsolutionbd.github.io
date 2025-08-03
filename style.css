@@ -98,7 +98,11 @@ footer .fw-bold {
     color: var(--primary-red) !important;
 }
 
-.nav-link.active, .nav-link:focus, .nav-link:hover {
+.nav-link.active {
+    color: var(--ds-orange) !important;
+}
+
+.nav-link:focus, .nav-link:hover {
     color: var(--primary-red) !important;
 }
 
