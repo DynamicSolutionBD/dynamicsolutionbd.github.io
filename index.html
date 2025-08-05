@@ -452,22 +452,28 @@
                     </div>
                 </div>
                 <div class="col-md-7">
-                    <form>
+                    <form id="contactForm">
+                        <div id="formMessage" class="alert d-none mb-3" role="alert"></div>
                         <div class="row g-3">
                             <div class="col-md-6">
-                                <input type="text" class="form-control" placeholder="Name" required>
+                                <input type="text" name="name" class="form-control" placeholder="Name" required>
                             </div>
                             <div class="col-md-6">
-                                <input type="email" class="form-control" placeholder="Email" required>
+                                <input type="email" name="email" class="form-control" placeholder="Email" required>
                             </div>
                             <div class="col-12">
-                                <input type="text" class="form-control" placeholder="Subject" required>
+                                <input type="text" name="subject" class="form-control" placeholder="Subject" required>
                             </div>
                             <div class="col-12">
-                                <textarea class="form-control" rows="4" placeholder="Your Message" required></textarea>
+                                <textarea name="message" class="form-control" rows="4" placeholder="Your Message" required></textarea>
                             </div>
                             <div class="col-12 text-end">
-                                <button type="submit" class="btn btn-danger">Send</button>
+                                <button type="submit" class="btn btn-danger" id="submitBtn">
+                                    <span class="btn-text">Send</span>
+                                    <span class="btn-loading d-none">
+                                        <i class="fas fa-spinner fa-spin me-2"></i>Sending...
+                                    </span>
+                                </button>
                             </div>
                         </div>
                     </form>

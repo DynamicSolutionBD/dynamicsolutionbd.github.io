@@ -82,4 +82,127 @@ document.addEventListener("DOMContentLoaded", function() {
         updateNavbar();
         updateActiveNavLink();
     });
+
+    // Contact Form Handling with Custom Email API
+    const contactForm = document.getElementById('contactForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const formMessage = document.getElementById('formMessage');
+    const btnText = submitBtn ? submitBtn.querySelector('.btn-text') : null;
+    const btnLoading = submitBtn ? submitBtn.querySelector('.btn-loading') : null;
+
+    if (contactForm && submitBtn) {
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Show loading state
+            if (btnText && btnLoading) {
+                btnText.classList.add('d-none');
+                btnLoading.classList.remove('d-none');
+            }
+            submitBtn.disabled = true;
+            if (formMessage) {
+                formMessage.classList.add('d-none');
+            }
+
+            try {
+                // Get form data
+                const name = contactForm.querySelector('input[name="name"]').value.trim();
+                const email = contactForm.querySelector('input[name="email"]').value.trim();
+                const subject = contactForm.querySelector('input[name="subject"]').value.trim();
+                const userMessage = contactForm.querySelector('textarea[name="message"]').value.trim();
+
+                // Validate form data
+                if (!name || !email || !subject || !userMessage) {
+                    throw new Error('All fields are required');
+                }
+
+                // Format the email content
+                const formattedMessage = `
+Contact Form Submission Details:
+
+Name: ${name}
+Email: ${email}
+Subject: ${subject}
+
+Message:
+${userMessage}
+
+---
+This email was sent from the Dynamic Solution website contact form.
+Submitted on: ${new Date().toLocaleString()}
+                `.trim();
+
+                // Prepare the API request
+                const emailData = {
+                    to: "dynamicsolutionrp@gmail.com",
+                    subject: `[CONTACT FORM] ${subject} - By ${email}`,
+                    message: formattedMessage,
+                    name: name
+                };
+
+                // Send email using your custom API
+                const response = await fetch('https://email-service-e5iq.onrender.com/api/v1/send-email', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(emailData)
+                });
+
+                const result = await response.json();
+
+                if (response.ok && result.status === 'success') {
+                    // Success
+                    if (formMessage) {
+                        formMessage.className = 'alert alert-success mb-3';
+                        formMessage.innerHTML = '<i class="fas fa-check-circle me-2"></i>Thank you! Your message has been sent successfully. We will get back to you soon.';
+                        formMessage.classList.remove('d-none');
+                    }
+                    contactForm.reset();
+                } else {
+                    // API returned error
+                    let errorMessage = 'Sorry, there was an error sending your message.';
+                    
+                    if (result.message) {
+                        errorMessage += ` ${result.message}`;
+                    }
+                    
+                    if (result.errors && result.errors.length > 0) {
+                        const errorDetails = result.errors.map(err => err.message).join(', ');
+                        errorMessage += ` Details: ${errorDetails}`;
+                    }
+                    
+                    throw new Error(errorMessage);
+                }
+            } catch (error) {
+                // Error handling
+                console.error('Email sending error:', error);
+                
+                if (formMessage) {
+                    formMessage.className = 'alert alert-danger mb-3';
+                    
+                    let errorText = 'Sorry, there was an error sending your message. ';
+                    
+                    if (error.message.includes('All fields are required')) {
+                        errorText = 'Please fill in all required fields.';
+                    } else if (error.message.includes('fetch')) {
+                        errorText += 'Please check your internet connection and try again.';
+                    } else {
+                        errorText += 'Please try again or contact us directly at dynamicsolutionrp@gmail.com';
+                    }
+                    
+                    formMessage.innerHTML = `<i class="fas fa-exclamation-circle me-2"></i>${errorText}`;
+                    formMessage.classList.remove('d-none');
+                }
+            } finally {
+                // Reset button state
+                if (btnText && btnLoading) {
+                    btnText.classList.remove('d-none');
+                    btnLoading.classList.add('d-none');
+                }
+                submitBtn.disabled = false;
+            }
+        });
+    }
 });
